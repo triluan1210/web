@@ -28,7 +28,7 @@ def main():
         # Config
         print(dicom_bytes)
         classes = ['Aortic enlargement ', 'Covid', 'Opacity', 'Normal']
-        model = keras.models.load_model('model/VGG16_224_proposed.h5')
+        model = keras.models.load_model('RES_128_proposed.h5')
 
         mode = st.sidebar.radio(
             "Select input source",
@@ -51,8 +51,8 @@ def main():
             if st.sidebar.button("Predicted"):
                 st.image(image_dicom,width =400)
                 #print(image_dicom.shape)
-                my_data2 = cv2.resize(image_dicom, (224, 224))
-                a = my_data2.reshape(-1, 224, 224, 1)
+                my_data2 = cv2.resize(image_dicom, (128, 128))
+                a = my_data2.reshape(-1, 128, 128, 1)
                 # pass the image through the network to obtain our predictions
                 preds = model.predict(a)
                 label = classes[np.argmax(preds)]
@@ -72,7 +72,7 @@ def main():
         # Config
         if image_bytes is not None:
             classes = ['Covid', 'Normal', 'Pneumonia']
-            model = keras.models.load_model('model/RESNET50_224_image.h5')
+            model = keras.models.load_model('RESNET50_128_proposed.h5')
 
             def load_image(img):
                 im = Image.open(img)
@@ -89,9 +89,9 @@ def main():
             if st.sidebar.button("Predicted"):
                     st.image(image_bytes, width=400)
                     #print(image_bytes.shape)
-                    my_data2 = cv2.resize(image, (224, 224))
+                    my_data2 = cv2.resize(image, (128, 128))
                     #my_data2 = image_bytes/255
-                    a = my_data2.reshape(-1, 224, 224,3)
+                    a = my_data2.reshape(-1, 128, 128,3)
                     # pass the image through the network to obtain our predictions
                     preds = model.predict(a)
                     label = classes[np.argmax(preds)]
