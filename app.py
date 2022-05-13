@@ -83,7 +83,7 @@ def main():
                 image = np.array(im)
                 return image
             image = load_image(image_bytes)
-            image = image/255
+
             #print(image.shape)
             #print(image)
 
@@ -94,7 +94,7 @@ def main():
                     st.image(image_bytes, width=400)
                     #print(image_bytes.shape)
                     my_data2 = cv2.resize(image, (128, 128))
-                    #my_data2 = image_bytes/255
+                    my_data2 = my_data2/255
                     a = my_data2.reshape(-1, 128, 128,3)
                     # pass the image through the network to obtain our predictions
                     preds = model.predict(a)
