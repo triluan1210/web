@@ -95,10 +95,10 @@ def main():
                     #print(image_bytes.shape)
                     my_data = cv2.resize(image, (128, 128))
                     my_data1 = my_data/255
-                    print(my_data1.shape)
-                    my_data2 = my_data1.reshape(-1, 128, 128,3)
+                   
+                    my_data3 = my_data1.reshape(-1, 128, 128,3)
                     # pass the image through the network to obtain our predictions
-                    preds = model.predict(my_data2)
+                    preds = model.predict(my_data3)
                     print(max(preds[0]))
                     if max(preds[0]) <= 0.98:
                         st.text("THIS IS NOT A FILE OF LUNG IMAGE")
