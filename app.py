@@ -55,7 +55,7 @@ def main():
                 a = my_data2.reshape(-1, 128, 128, 1)
                 # pass the image through the network to obtain our predictions
                 preds = model.predict(a)
-                if max(preds[0]) <= 0.7:
+                if max(preds[0]) <= 0.75:
                     st.text("THIS IS NOT A FILE OF LUNG DICOM")
 
                 else:
