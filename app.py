@@ -55,12 +55,12 @@ def main():
                 a = my_data2.reshape(-1, 128, 128, 1)
                 # pass the image through the network to obtain our predictions
                 preds = model.predict(a)
-                if max(preds[0]) >= 0.94:
-                        label = classes[np.argmax(preds)]
-                        st.text("THE RESULT OF DICOM FILE IS : " + label)
+                if max(preds[0]) <= 0.75:
+                    st.text("THIS IS NOT A FILE OF LUNG DICOM")
+
                 else:
-                        
-                        st.text("THIS IS NOT A FILE OF LUNG DICOM")
+                    label = classes[np.argmax(preds)]
+                    st.text("THE RESULT OF DICOM IS: " + label + " WITH ACCURACY IS " + str(max(preds[0])*100) + " %")
 
         if mode == 'View information' and st.sidebar.button("Load Information"):
             view = dicom_header.__repr__().split("\n")
@@ -100,11 +100,12 @@ def main():
                     # pass the image through the network to obtain our predictions
                     preds = model.predict(my_data3)
                     print(max(preds[0]))
-                    if max(preds[0]) <= 0.98:
-                        st.text("THIS IS NOT A FILE OF LUNG IMAGE")
+                    if max(preds[0]) <= 0.75:
+                        st.text("THIS IS NOT A FILE OF LUNG DICOM")
+
                     else:
                         label = classes[np.argmax(preds)]
-                        st.text("RESULT : " + label)
+                        st.text("THE RESULT OF DICOM IS: " + label + " WITH ACCURACY IS " + str(max(preds[0])*100) + " %")
 
 if __name__ == "__main__":
     try:
