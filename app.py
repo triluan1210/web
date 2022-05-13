@@ -91,7 +91,7 @@ def main():
                     #print(image_bytes.shape)
                     my_data2 = cv2.resize(image, (128, 128))
                     #my_data2 = image_bytes/255
-                    a = my_data2.reshape(-1, 128, 128,3)
+                    a = my_data2.reshape(-1, 128, 128)
                     # pass the image through the network to obtain our predictions
                     preds = model.predict(a)
                     label = classes[np.argmax(preds)]
