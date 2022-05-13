@@ -55,7 +55,7 @@ def main():
                 a = my_data2.reshape(-1, 128, 128, 1)
                 # pass the image through the network to obtain our predictions
                 preds = model.predict(a)
-                if max(preds[0]) <= 0.8:
+                if max(preds[0]) <= 0.94:
                         st.text("THIS IS NOT A FILE OF LUNG IMAGE")
                 else:
                         label = classes[np.argmax(preds)]
@@ -98,7 +98,7 @@ def main():
                     a = my_data2.reshape(-1, 128, 128,3)
                     # pass the image through the network to obtain our predictions
                     preds = model.predict(a)
-                    if max(preds[0]) <= 0.8:
+                    if max(preds[0]) <= 0.94:
                         st.text("THIS IS NOT A FILE OF LUNG IMAGE")
                     else:
                         label = classes[np.argmax(preds)]
