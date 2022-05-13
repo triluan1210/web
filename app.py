@@ -27,7 +27,7 @@ def main():
         dicom_bytes = st.sidebar.file_uploader("Upload file", type=["dcm","dicom"])
         # Config
         print(dicom_bytes)
-        classes = ['Aortic enlargement ', 'Covid', 'Opacity', 'Normal']
+        classes = ['AORTIC ENLARGEMENT ', 'COVID 19', 'OPACITY', 'NORMAL']
         model = keras.models.load_model('RES_128_proposed.h5')
 
         mode = st.sidebar.radio(
@@ -55,8 +55,12 @@ def main():
                 a = my_data2.reshape(-1, 128, 128, 1)
                 # pass the image through the network to obtain our predictions
                 preds = model.predict(a)
-                label = classes[np.argmax(preds)]
-                st.text("RESULT : " + label)
+                if max(preds[0]) <= 0.8:
+                        st.text("THIS IS NOT A FILE OF LUNG IMAGE")
+                else:
+                        label = classes[np.argmax(preds)]
+                        st.text("THE RESULT OF DICOM FILE IS : " + label)
+
 
         if mode == 'View information' and st.sidebar.button("Load Information"):
             view = dicom_header.__repr__().split("\n")
@@ -71,7 +75,7 @@ def main():
         image_bytes = st.sidebar.file_uploader("Upload file", type=["jpg", "png"])
         # Config
         if image_bytes is not None:
-            classes = ['Covid', 'Normal', 'Pneumonia']
+            classes = ['COVID', 'NORMAL', 'PNEUMONIA']
             model = keras.models.load_model('RESNET50_128_proposed.h5')
 
             def load_image(img):
@@ -94,9 +98,11 @@ def main():
                     a = my_data2.reshape(-1, 128, 128,3)
                     # pass the image through the network to obtain our predictions
                     preds = model.predict(a)
-                    label = classes[np.argmax(preds)]
-                    st.text("RESULT : " + label)
-
+                    if max(preds[0]) <= 0.8:
+                        st.text("THIS IS NOT A FILE OF LUNG IMAGE")
+                    else:
+                        label = classes[np.argmax(preds)]
+                        st.text("THE RESULT OF IMAGE IS : " + label)
 
 if __name__ == "__main__":
     try:
