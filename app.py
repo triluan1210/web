@@ -55,7 +55,7 @@ def main():
                 a = my_data2.reshape(-1, 128, 128, 1)
                 # pass the image through the network to obtain our predictions
                 preds = model.predict(a)
-                if max(preds[0]) >= 0.90:
+                if max(preds[0]) >= 0.94:
                         label = classes[np.argmax(preds)]
                         st.text("THE RESULT OF DICOM FILE IS : " + label)
                 else:
@@ -95,6 +95,7 @@ def main():
                     #print(image_bytes.shape)
                     my_data2 = cv2.resize(image, (128, 128))
                     my_data2 = my_data2/255
+                    print(my_data2.shape)
                     a = my_data2.reshape(-1, 128, 128,3)
                     # pass the image through the network to obtain our predictions
                     preds = model.predict(a)
