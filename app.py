@@ -56,7 +56,7 @@ def main():
                 # pass the image through the network to obtain our predictions
                 preds = model.predict(a)
                 if max(preds[0]) <= 0.94:
-                        st.text("THIS IS NOT A FILE OF LUNG IMAGE")
+                        st.text("THIS IS NOT A FILE OF LUNG DICOM")
                 else:
                         label = classes[np.argmax(preds)]
                         st.text("THE RESULT OF DICOM FILE IS : " + label)
