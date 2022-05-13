@@ -93,12 +93,12 @@ def main():
             if st.sidebar.button("Predicted"):
                     st.image(image_bytes, width=400)
                     #print(image_bytes.shape)
-                    my_data2 = cv2.resize(image, (128, 128))
-                    my_data2 = my_data2/255
-                    print(my_data2.shape)
-                    a = my_data2.reshape(-1, 128, 128,3)
+                    my_data = cv2.resize(image, (128, 128))
+                    my_data1 = my_data/255
+                    print(my_data1.shape)
+                    my_data2 = my_data1.reshape(-1, 128, 128,3)
                     # pass the image through the network to obtain our predictions
-                    preds = model.predict(a)
+                    preds = model.predict(my_data2)
                     print(max(preds[0]))
                     if max(preds[0]) <= 0.94:
                         st.text("THIS IS NOT A FILE OF LUNG IMAGE")
